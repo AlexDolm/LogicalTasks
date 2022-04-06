@@ -2,7 +2,7 @@ import UIKit
 
 //В коде сторонней библиотеки обнаружился баг. Вместо отсортированного массива строк библиотека возвращает массив случайно упорядоченных строк
 
-var response = "ыв3а\nвы1а\nsd2f"
+var response = "c1at\n3dog\ncar1"
 var fullNameArr = response.components(separatedBy: "\n")
 var mass = [String]()
 
