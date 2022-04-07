@@ -23,3 +23,52 @@ for i in 1...inputMassive.count { //i takes values from 0 to the size of the arr
 }
 print(newMassiveForAnswer)
 
+/*
+ Write a function to find the longest common prefix string amongst an array of strings.
+
+ If there is no common prefix, return an empty string "".
+ 
+ */
+
+extension String { // extension for the convenience of working with indexes in Swift5
+    func index(from: Int) -> Index {
+        return self.index(startIndex, offsetBy: from)
+    }
+
+    func substring(from: Int) -> String {
+        let fromIndex = index(from: from)
+        return String(self[fromIndex...])
+    }
+
+    func substring(to: Int) -> String {
+        let toIndex = index(from: to)
+        return String(self[..<toIndex])
+    }
+
+    func substring(with r: Range<Int>) -> String {
+        let startIndex = index(from: r.lowerBound)
+        let endIndex = index(from: r.upperBound)
+        return String(self[startIndex..<endIndex])
+    }
+}
+
+var strs = ["flower","flow","flight"] //input string
+var minWord = strs.min(by: {$1.count > $0.count}) //get the shortest word
+var foundPrefix = false
+while minWord?.count != 0{ //will slowly cut off from the word and check
+    if !foundPrefix{
+        for i in strs.indices{
+        if strs[i].substring(to: minWord!.count) == minWord!{
+            if(i == strs.count-1){
+                foundPrefix = true
+            }
+        }
+        else{break}
+    }
+    if (!foundPrefix){
+        minWord!.remove(at: minWord!.index(before: minWord!.endIndex))
+        }
+    }
+    else{break}
+}
+print(minWord!)
